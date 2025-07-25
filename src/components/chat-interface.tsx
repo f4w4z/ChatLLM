@@ -8,7 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from "@/hooks/use-toast";
-import { SendHorizonal, Loader2 } from 'lucide-react';
+import { SendHorizonal, Loader2, Bot } from 'lucide-react';
 import ChatMessage from './chat-message';
 import { SidebarInset } from './ui/sidebar';
 
@@ -41,8 +41,10 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
         setIsLoading(false);
       }
     };
-    fetchInitialPrompt();
-  }, [setMessages, setIsLoading, toast]);
+    if (messages.length === 0) {
+      fetchInitialPrompt();
+    }
+  }, [setMessages, setIsLoading, toast, messages.length]);
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -82,22 +84,28 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
   };
   
   return (
-    <SidebarInset className="flex flex-col h-screen p-4 gap-4">
-        <h1 className="text-2xl font-headline font-bold text-center text-primary">ChatLLM</h1>
-        <ScrollArea className="flex-grow" ref={scrollAreaRef}>
-          <div className="space-y-6 pr-4">
+    <SidebarInset className="flex flex-col h-screen p-0">
+      <header className="p-4 border-b flex items-center gap-3">
+        <Bot className="w-6 h-6 text-primary" />
+        <h1 className="text-xl font-semibold font-headline">
+          AI Chat
+        </h1>
+      </header>
+      <ScrollArea className="flex-grow p-4" ref={scrollAreaRef}>
+          <div className="space-y-6 pr-4 max-w-4xl mx-auto w-full">
             {messages.map((msg, index) => (
               <ChatMessage key={index} message={msg} />
             ))}
             {isLoading && messages.length > 0 && <ChatMessage isLoading />}
           </div>
-        </ScrollArea>
-        <form onSubmit={handleSubmit} className="flex items-end gap-2">
+      </ScrollArea>
+      <div className="p-4 border-t bg-background">
+        <form onSubmit={handleSubmit} className="flex items-end gap-2 max-w-4xl mx-auto">
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
-            className="flex-grow resize-none"
+            placeholder="Ask me anything..."
+            className="flex-grow resize-none rounded-full py-3 px-4 shadow-sm"
             rows={1}
             onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
@@ -106,7 +114,7 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
                 }
             }}
           />
-          <Button type="submit" disabled={isLoading || !input.trim()} className="h-full">
+          <Button type="submit" disabled={isLoading || !input.trim()} size="icon" className="rounded-full w-12 h-12 flex-shrink-0">
             {isLoading ? (
               <Loader2 className="animate-spin" />
             ) : (
@@ -115,6 +123,7 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
             <span className="sr-only">Send</span>
           </Button>
         </form>
+      </div>
     </SidebarInset>
   );
 }

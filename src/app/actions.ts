@@ -34,6 +34,10 @@ export async function getAiResponse(
   settings: ChatSettings
 ) {
   try {
+    if (!process.env.GEMINI_API_KEY) {
+      return { success: false, response: 'The GEMINI_API_KEY environment variable is not set. Please add it to your .env file.' };
+    }
+
     const validatedHistory = z.array(messageSchema).parse(history);
     const validatedSettings = settingsSchema.parse(settings);
 

@@ -58,11 +58,12 @@ export async function getAiResponse(
     });
 
     return { success: true, response: text() };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error getting AI response:', error);
     if (error instanceof z.ZodError) {
       return { success: false, response: 'Invalid data format.' };
     }
-    return { success: false, response: 'An error occurred. Please check your API key and try again.' };
+    const errorMessage = error.message || 'An error occurred. Please check your API key and try again.';
+    return { success: false, response: errorMessage };
   }
 }

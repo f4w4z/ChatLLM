@@ -58,7 +58,8 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      const scrollHeight = textareaRef.current.scrollHeight;
+      textareaRef.current.style.height = `${scrollHeight}px`;
     }
   }, [input]);
 
@@ -121,7 +122,7 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
                 }
             }}
           />
-          <Button type="submit" disabled={isLoading || !input.trim()} className="h-full w-12 flex-shrink-0 self-stretch">
+          <Button type="submit" disabled={isLoading || !input.trim()} className="w-12 flex-shrink-0 self-stretch">
             {isLoading ? (
               <Loader2 className="animate-spin" />
             ) : (

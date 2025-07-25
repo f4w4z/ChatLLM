@@ -57,7 +57,7 @@ export async function getAiResponse(
       },
     });
 
-    return { success: true, response: text() };
+    return { success: true, response: text };
   } catch (error: any) {
     console.error('Error getting AI response:', error);
     if (error instanceof z.ZodError) {

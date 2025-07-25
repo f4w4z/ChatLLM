@@ -1,7 +1,6 @@
 'use client';
 
 import { Bot, User, Loader2 } from 'lucide-react';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import type { Message } from '@/app/actions';
 
@@ -15,13 +14,6 @@ export default function ChatMessage({ message, isLoading = false }: ChatMessageP
 
   return (
     <div className={cn('flex items-start gap-4')}>
-      <Avatar className={cn(
-        'w-8 h-8 text-primary-foreground flex-shrink-0 rounded-none',
-        isAi ? 'bg-primary' : 'bg-secondary-foreground'
-        )}>
-        <AvatarFallback>{isAi ? <Bot size={20} /> : <User size={20} />}</AvatarFallback>
-      </Avatar>
-      
       <div className="flex flex-col gap-1 w-full">
         <p className="font-bold text-sm">
             {isAi ? 'AI Assistant' : 'You'}

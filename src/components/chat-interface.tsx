@@ -94,7 +94,7 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
     <div className="flex flex-col h-screen p-0">
       <header className="p-4 border-b flex items-center">
         <h1 className="text-xl font-semibold font-headline">
-          AI Chat
+          ChatLLM
         </h1>
       </header>
       <ScrollArea className="flex-grow p-4" ref={scrollAreaRef}>
@@ -121,7 +121,7 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
                 }
             }}
           />
-          <Button type="submit" disabled={isLoading || !input.trim()} size="icon" className="w-12 h-12 flex-shrink-0">
+          <Button type="submit" disabled={isLoading || !input.trim()} className="h-12 w-12 flex-shrink-0">
             {isLoading ? (
               <Loader2 className="animate-spin" />
             ) : (

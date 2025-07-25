@@ -2,7 +2,7 @@
 
 import type { FormEvent } from 'react';
 import { useState, useEffect, useRef } from 'react';
-import { getAiResponse, Message, ChatSettings } from '@/app/actions';
+import { getAiResponse, Message } from '@/app/actions';
 import { generateInitialPrompt } from '@/ai/flows/generate-initial-prompt';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
@@ -14,7 +14,7 @@ import ChatMessage from './chat-message';
 interface ChatInterfaceProps {
   messages: Message[];
   setMessages: (messages: Message[]) => void;
-  settings: ChatSettings;
+  settings: any; // Using any for now to avoid breaking changes, will be removed
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
 }

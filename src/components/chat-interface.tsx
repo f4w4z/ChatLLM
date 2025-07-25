@@ -10,7 +10,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from "@/hooks/use-toast";
 import { SendHorizonal, Loader2, Bot } from 'lucide-react';
 import ChatMessage from './chat-message';
-import { SidebarInset } from './ui/sidebar';
 
 interface ChatInterfaceProps {
   messages: Message[];
@@ -84,7 +83,7 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
   };
   
   return (
-    <SidebarInset className="flex flex-col h-screen p-0">
+    <div className="flex flex-col h-screen p-0">
       <header className="p-4 border-b flex items-center gap-3">
         <Bot className="w-6 h-6 text-primary" />
         <h1 className="text-xl font-semibold font-headline">
@@ -105,7 +104,7 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask me anything..."
-            className="flex-grow resize-none rounded-full py-3 px-4 shadow-sm"
+            className="flex-grow resize-none rounded-none shadow-sm"
             rows={1}
             onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
@@ -114,7 +113,7 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
                 }
             }}
           />
-          <Button type="submit" disabled={isLoading || !input.trim()} size="icon" className="rounded-full w-12 h-12 flex-shrink-0">
+          <Button type="submit" disabled={isLoading || !input.trim()} size="icon" className="rounded-none w-12 h-12 flex-shrink-0">
             {isLoading ? (
               <Loader2 className="animate-spin" />
             ) : (
@@ -124,6 +123,6 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
           </Button>
         </form>
       </div>
-    </SidebarInset>
+    </div>
   );
 }

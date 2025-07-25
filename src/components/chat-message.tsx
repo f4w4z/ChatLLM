@@ -16,7 +16,7 @@ export default function ChatMessage({ message, isLoading = false }: ChatMessageP
   return (
     <div className={cn('flex items-start gap-4')}>
       <Avatar className={cn(
-        'w-8 h-8 text-primary-foreground flex-shrink-0',
+        'w-8 h-8 text-primary-foreground flex-shrink-0 rounded-none',
         isAi ? 'bg-primary' : 'bg-secondary-foreground'
         )}>
         <AvatarFallback>{isAi ? <Bot size={20} /> : <User size={20} />}</AvatarFallback>
@@ -28,7 +28,7 @@ export default function ChatMessage({ message, isLoading = false }: ChatMessageP
         </p>
         <div
             className={cn(
-            'p-3 rounded-lg max-w-full inline-block',
+            'p-3 rounded-none max-w-full inline-block',
             isAi ? 'bg-secondary text-secondary-foreground' : 'bg-primary text-primary-foreground'
             )}
         >

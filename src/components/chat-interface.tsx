@@ -121,7 +121,7 @@ export default function ChatInterface({ messages, setMessages, settings, isLoadi
                 }
             }}
           />
-          <Button type="submit" disabled={isLoading || !input.trim()} className="h-12 w-12 flex-shrink-0">
+          <Button type="submit" disabled={isLoading || !input.trim()} className="h-full w-12 flex-shrink-0 self-stretch">
             {isLoading ? (
               <Loader2 className="animate-spin" />
             ) : (
